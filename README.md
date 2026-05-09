@@ -184,7 +184,7 @@ Finalmente, `min_score = 0.70` controla el umbral mínimo de similitud semántic
 
 Durante la evaluación se obtuvieron excelentes resultados en Faithfulness, alcanzando un promedio global de 1.0000. Esto demuestra que el sistema responde con base en evidencia documental real y evita alucinaciones incluso cuando no existe información disponible.
 
-El Context Precision alcanzó 0.7255 como promedio general, aunque este valor se ve afectado por los dos casos de prueba de alucinación. Al excluir esos casos, el promedio sube a 0.9674, confirmando que el retrieval con FAISS funciona de forma muy sólida.
+El Context Precision alcanzó 0.7255 como promedio general, aunque este valor se ve afectado por los dos casos de prueba de alucinación. Al excluir esos casos, el promedio sube a 1.0, confirmando que el retrieval con FAISS funciona de forma muy sólida.
 
 La principal debilidad apareció en Answer Relevancy, con un promedio general de 0.3697. Esto ocurre porque el modelo generador todavía tiende a responder con exceso de información, redundancia o mezclando conceptos no solicitados.
 
