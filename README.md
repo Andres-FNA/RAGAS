@@ -198,12 +198,4 @@ El proyecto demuestra que es posible construir un sistema RAG robusto, completam
 
 La recuperación semántica mostró un comportamiento sólido y consistente, especialmente gracias al uso de embeddings de alta calidad y similitud coseno real con FAISS.
 
-La principal oportunidad de mejora se encuentra en la etapa de generación del modelo, particularmente en el control de respuestas extensas y en la mejora de Answer Relevancy mediante prompt engineering más estricto y few-shot prompting mejor diseñado.
 
-Esto confirma que el siguiente paso de optimización no debe centrarse en retrieval, sino en mejorar la forma en que el LLM interpreta y responde exactamente lo que se le pregunta.
-
----
-
-# Autor
-
-Proyecto académico desarrollado para evaluación de sistemas RAG usando Ollama, FAISS, embeddings semánticos y RAGAS, implementado completamente en entorno local.
