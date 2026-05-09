@@ -1,4 +1,4 @@
-# README.md
+
 
 # Sistema RAG Local con Ollama + FAISS + RAGAS
 
