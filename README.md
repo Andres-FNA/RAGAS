@@ -1,6 +1,6 @@
 
 
-# Sistema RAG Local con Ollama + FAISS + RAGAS
+# Sistema RAG Local con Ollama + RAGAS
 
 Este proyecto implementa un sistema RAG (Retrieval-Augmented Generation) completamente local utilizando Ollama, FAISS, embeddings semánticos y evaluación automática con RAGAS, sin depender de OpenAI ni de servicios externos. El objetivo principal es construir un asistente capaz de responder preguntas únicamente con base en documentos institucionales, minimizando alucinaciones y mejorando la precisión mediante recuperación semántica de contexto.
 
