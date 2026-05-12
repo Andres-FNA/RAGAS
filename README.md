@@ -2,7 +2,7 @@
 
 # Sistema RAG Local con Ollama + RAGAS
 
-Este proyecto implementa un sistema RAG (Retrieval-Augmented Generation) completamente local utilizando Ollama, FAISS, embeddings semánticos y evaluación automática con RAGAS, sin depender de OpenAI ni de servicios externos. El objetivo principal es construir un asistente capaz de responder preguntas únicamente con base en documentos institucionales, minimizando alucinaciones y mejorando la precisión mediante recuperación semántica de contexto.
+Este proyecto implementa un sistema RAG (Retrieval-Augmented Generation) completamente local utilizando Ollama, embeddings semánticos y evaluación automática con RAGAS, sin depender de OpenAI ni de servicios externos. El objetivo principal es construir un asistente capaz de responder preguntas únicamente con base en documentos institucionales, minimizando alucinaciones y mejorando la precisión mediante recuperación semántica de contexto.
 
 Además del sistema de consulta, el proyecto incluye una evaluación formal del pipeline usando métricas de RAGAS como Faithfulness, Answer Relevancy y Context Precision, permitiendo medir tanto la calidad de las respuestas como la efectividad del sistema de recuperación.
 
@@ -28,7 +28,6 @@ Finalmente, Ollama permitió usar el mismo modelo como generador y como juez en 
 
 El sistema fue desarrollado principalmente en Python 3.10+ y utiliza varias librerías orientadas a recuperación semántica, evaluación automática y procesamiento local de modelos.
 
-FAISS se utilizó para construir la base vectorial y realizar búsquedas rápidas mediante similitud coseno. Pandas permitió organizar y exportar resultados, mientras que NumPy facilitó el manejo de vectores de embeddings.
 
 RAGAS fue utilizado para evaluar el desempeño del sistema mediante métricas especializadas para pipelines RAG. LangChain Community permitió la integración con Ollama tanto para generación como para embeddings. Requests se utilizó para las llamadas HTTP locales y Tabulate para mostrar resultados de configuración de forma estructurada.
 
@@ -52,7 +51,6 @@ Esto instalará automáticamente todas las dependencias necesarias para:
 
 * indexación de documentos
 * embeddings semánticos
-* vectorización con FAISS
 * consultas RAG
 * evaluación con RAGAS
 * exportación de resultados a CSV
@@ -85,7 +83,7 @@ El proyecto está organizado de forma modular para separar claramente cada etapa
 
 La carpeta `docs/` contiene los documentos fuente que serán consultados por el sistema, como los sílabos de Ingeniería de Software y Redes de Comunicación.
 
-La carpeta `vector_db/` almacena el índice FAISS y la metadata generada durante la indexación.
+La carpeta `vector_db/` almacena los datos y la metadata generada durante la indexación.
 
 El archivo `document_loader.py` se encarga de cargar documentos y dividirlos en chunks. `vector_store.py` genera embeddings y construye la base vectorial. `rag_engine.py` implementa la lógica principal del sistema RAG y `evaluate_rag.py` ejecuta la evaluación con RAGAS.
 
@@ -99,7 +97,7 @@ Finalmente, `main.py` funciona como punto de entrada principal del sistema.
 
 `document_loader.py` se encarga de cargar archivos `.txt`, `.pdf` y `.docx`, limpiar el contenido textual y dividir los documentos en chunks con overlap para mejorar la recuperación semántica.
 
-`vector_store.py` genera embeddings usando Ollama, normaliza vectores y construye un índice FAISS con similitud coseno real mediante `IndexFlatIP + normalize_L2`. Aquí también se configuran parámetros importantes como el modelo de embeddings y el umbral mínimo de similitud.
+`vector_store.py` genera embeddings usando Ollama, normaliza vectores y construye un índice con similitud coseno real mediante `IndexFlatIP + normalize_L2`. Aquí también se configuran parámetros importantes como el modelo de embeddings y el umbral mínimo de similitud.
 
 `rag_engine.py` representa el corazón del sistema. Recupera chunks relevantes, detecta automáticamente el documento adecuado, construye prompts estrictos con few-shot prompting y consulta el modelo generador evitando alucinaciones cuando no existe suficiente contexto.
 
@@ -142,7 +140,7 @@ El siguiente paso es ejecutar la indexación mediante:
 python main.py --index
 ```
 
-Esto carga los documentos, genera chunks, crea embeddings y construye el índice FAISS que luego será usado para recuperación semántica.
+Esto carga los documentos, genera chunks, crea embeddings y construye el índice que luego será usado para recuperación semántica.
 
 Después de indexar, ya pueden hacerse consultas usando:
 
@@ -184,7 +182,7 @@ Finalmente, `min_score = 0.70` controla el umbral mínimo de similitud semántic
 
 Durante la evaluación se obtuvieron excelentes resultados en Faithfulness, alcanzando un promedio global de 1.0000. Esto demuestra que el sistema responde con base en evidencia documental real y evita alucinaciones incluso cuando no existe información disponible.
 
-El Context Precision alcanzó 0.7255 como promedio general, aunque este valor se ve afectado por los dos casos de prueba de alucinación. Al excluir esos casos, el promedio sube a 1.0, confirmando que el retrieval con FAISS funciona de forma muy sólida.
+El Context Precision alcanzó 0.7255 como promedio general, aunque este valor se ve afectado por los dos casos de prueba de alucinación. Al excluir esos casos, el promedio sube a 1.0, confirmando que el retrieval funciona de forma muy sólida.
 
 La principal debilidad apareció en Answer Relevancy, con un promedio general de 0.3697. Esto ocurre porque el modelo generador todavía tiende a responder con exceso de información, redundancia o mezclando conceptos no solicitados.
 
@@ -194,8 +192,8 @@ Sin contar los casos de alucinación, este valor mejora a 0.4929, lo que demuest
 
 # Conclusión
 
-El proyecto demuestra que es posible construir un sistema RAG robusto, completamente local y sin dependencia de APIs externas, utilizando Ollama, FAISS y RAGAS.
+El proyecto demuestra que es posible construir un sistema RAG robusto, completamente local y sin dependencia de APIs externas, utilizando Ollama, y RAGAS.
 
-La recuperación semántica mostró un comportamiento sólido y consistente, especialmente gracias al uso de embeddings de alta calidad y similitud coseno real con FAISS.
+La recuperación semántica mostró un comportamiento sólido y consistente, especialmente gracias al uso de embeddings de alta calidad y similitud coseno real.
 
 
